@@ -14,6 +14,8 @@
             --dark-bg: #1e293b;
             --white: #fff;
             --gray: #64748b;
+            --success-color: #4CAF50;
+            --error-color: #f44336;
         }
         
         /* Dark mode variables */
@@ -25,6 +27,8 @@
             --dark-bg: #030712;
             --white: #1f2937;
             --gray: #9ca3af;
+            --success-color: #2e7d32;
+            --error-color: #c62828;
         }
         
         * {
@@ -100,6 +104,30 @@
             background: var(--secondary-color);
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Messages */
+        .message {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .success-message {
+            background: var(--success-color);
+            color: white;
+        }
+        
+        .error-message {
+            background: var(--error-color);
+            color: white;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         /* Header */
@@ -374,10 +402,70 @@
             background-color: var(--light-bg);
         }
         
-        .contact-content {
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: center;
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+        }
+        
+        .contact-form form {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: var(--light-bg);
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+        
+        .contact-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+        }
+        
+        .contact-info > div {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            height: 100%;
+        }
+        
+        .contact-info h4 {
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .contact-info i {
+            margin-right: 10px;
         }
         
         .contact-links {
@@ -726,30 +814,74 @@
     <!-- Contact Section -->
     <section id="contact">
         <div class="container">
-            <div class="contact-content">
-                <h2>Get In Touch</h2>
-                <p>Ready to automate your workflows or need a custom Python solution? Reach out to me!</p>
-                
-                <!-- New Email Section -->
-                <div class="email-section" style="margin: 30px 0; padding: 20px; background: rgba(37, 99, 235, 0.1); border-radius: 10px; max-width: 500px; margin-left: auto; margin-right: auto;">
-                    <h3 style="text-align: center; margin-bottom: 15px;"><i class="fas fa-envelope" style="margin-right: 10px;"></i>Email Me</h3>
-                    <p style="text-align: center; font-size: 1.1rem;">
-                        <a href="mailto:m.umar32004@gmail.com" style="color: var(--primary-color); text-decoration: none; font-weight: 600;">
-                            m.umar32004@gmail.com
-                        </a>
-                    </p>
+            <h2>Get In Touch</h2>
+            <p>Ready to automate your workflows or need a custom Python solution? Reach out to me!</p>
+            
+            <div class="contact-container">
+                <!-- Contact Form -->
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <!-- Honeypot field for spam prevention -->
+                        <div style="position: absolute; left: -5000px;">
+                            <input type="text" name="importantNote" tabindex="-1">
+                        </div>
+                        
+                        <div>
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        
+                        <div>
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                        
+                        <div>
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div>
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        
+                        <div>
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
                 </div>
                 
-                <div class="contact-links">
-                    <a href="https://www.fiverr.com/s/42L05wR" title="Fiverr">
-                        <i class="fab fa-fonticons-fi"></i>
-                    </a>
-                    <a href="mailto:m.umar32004@gmail.com" title="Email">
-                        <i class="fas fa-envelope"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/umer-sheikh-3959712b6/" title="LinkedIn">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <div>
+                        <h3>Contact Information</h3>
+                        
+                        <div style="margin-bottom: 30px;">
+                            <h4><i class="fas fa-envelope"></i>Email</h4>
+                            <p><a href="mailto:m.umar32004@gmail.com">m.umar32004@gmail.com</a></p>
+                        </div>
+                        
+                        <div style="margin-bottom: 30px;">
+                            <h4><i class="fas fa-globe"></i>Fiverr Profile</h4>
+                            <p><a href="https://www.fiverr.com/s/42L05wR">fiverr.com/s/42L05wR</a></p>
+                        </div>
+                        
+                        <div class="contact-links">
+                            <a href="https://www.fiverr.com/s/42L05wR" title="Fiverr">
+                                <i class="fab fa-fonticons-fi"></i>
+                            </a>
+                            <a href="mailto:m.umar32004@gmail.com" title="Email">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/umer-sheikh-3959712b6/" title="LinkedIn">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -821,6 +953,72 @@
                 localStorage.setItem('theme', 'light');
             }
         });
+
+        // Google Forms Submission - SPECIFIC TO YOUR FORM
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Check honeypot field
+            if (this.querySelector('[name="importantNote"]').value) {
+                return; // Likely a bot - don't submit
+            }
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            
+            // Get form data
+            const formData = new FormData(this);
+            
+            // Map to YOUR SPECIFIC Google Form field IDs
+            const googleFormsData = new URLSearchParams();
+            googleFormsData.append('entry.141654027', formData.get('firstName'));  // First Name
+            googleFormsData.append('entry.1084793286', formData.get('lastName'));   // Last Name
+            googleFormsData.append('entry.1714659439', formData.get('email'));      // Email
+            googleFormsData.append('entry.1806430388', formData.get('phone'));      // Phone
+            googleFormsData.append('entry.750348899', formData.get('message'));     // Message
+            
+            // Remove any existing messages
+            const existingMessages = document.querySelectorAll('.message');
+            existingMessages.forEach(msg => msg.remove());
+            
+            // Submit to YOUR SPECIFIC Google Form
+            fetch('https://docs.google.com/forms/d/e/1FAIpQLSf3_cdLSj9pgYPRzncNIhz4R4aSXDDW7TDbcbwTTPDVr_glfA/formResponse', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: googleFormsData
+            })
+            .then(() => {
+                showMessage('Thank you! Your message has been sent successfully.', 'success');
+                this.reset();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showMessage('There was an error sending your message. Please try again later.', 'error');
+            })
+            .finally(() => {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalBtnText;
+            });
+        });
+
+        function showMessage(text, type) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}-message`;
+            messageDiv.textContent = text;
+            
+            const form = document.getElementById('contactForm');
+            form.parentNode.insertBefore(messageDiv, form.nextSibling);
+            
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 5000);
+        }
     </script>
 </body>
 </html>
